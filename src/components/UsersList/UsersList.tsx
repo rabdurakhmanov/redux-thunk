@@ -1,10 +1,9 @@
 import React from 'react';
-import {useAppDispatch, useAppSelector} from "../../store/hooks/usersHooks";
-import {AppDispatch} from "../../store/store";
+import {useAppDispatch, useAppSelector} from '../../store/hooks/usersHooks';
 
 export function UsersList() {
     const users = useAppSelector(state => state.users);
-    const dispatch: AppDispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     return null;
 }
