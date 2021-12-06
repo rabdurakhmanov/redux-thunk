@@ -1,7 +1,15 @@
 import {createSlice, Draft, PayloadAction} from '@reduxjs/toolkit';
 
+export interface UsersListItem {
+    login: string,
+    id: string,
+    url: string,
+    type: string,
+    'is_admin': boolean
+}
+
 export interface UsersState {
-    value: {}[];
+    value: UsersListItem[];
 }
 
 const initialState: UsersState = {
@@ -14,15 +22,15 @@ const {actions, reducer} = createSlice({
     name,
     initialState,
     reducers: {
-        addUser: (state: Draft<UsersState>, action: PayloadAction<any>) => {
-            state.value = [...state.value, {}]
+        addUsers: (state: Draft<UsersState>, action: PayloadAction<any>) => {
+            state.value = [...state.value, ...action.payload];
         },
-        deleteUser: (state: Draft<UsersState>, action: PayloadAction<any>) => {
-            state.value = state.value.filter(item => true);
+        clearUsers: (state: Draft<UsersState>) => {
+            state.value = [];
         },
     },
 });
 
-export const {addUser, deleteUser} = actions;
+export const {addUsers, clearUsers} = actions;
 
 export default reducer;
