@@ -1,6 +1,6 @@
-import {createSlice, Draft, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
 
-export interface UsersListItem {
+export interface User {
     login: string,
     id: string,
     url: string,
@@ -9,16 +9,16 @@ export interface UsersListItem {
 }
 
 export interface UsersState {
-    value: UsersListItem[];
+    value: User[];
 }
 
 const initialState: UsersState = {
     value: [],
 };
 
-const name = 'counter';
+const name = 'users';
 
-const {actions, reducer} = createSlice({
+const { actions, reducer } = createSlice({
     name,
     initialState,
     reducers: {
@@ -31,6 +31,6 @@ const {actions, reducer} = createSlice({
     },
 });
 
-export const {addUsers, clearUsers} = actions;
+export const { addUsers, clearUsers } = actions;
 
 export default reducer;

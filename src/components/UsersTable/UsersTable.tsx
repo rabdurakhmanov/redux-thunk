@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
-import {useAppDispatch, useAppSelector} from '../../store/hooks/usersHooks';
-import {Table, Tag} from "antd";
-import {fetchUsers} from "../../store/thunks/usersThunk";
+import { List, Table } from 'antd';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useStoreDispatch, useStoreSelector } from '../../store/hooks/storeHooks';
+import { fetchUsers } from '../../store/thunks/usersThunk';
 
 enum UsersTableColumn {
     Login = 'login',
@@ -10,22 +11,19 @@ enum UsersTableColumn {
     SiteAdmin = 'site_admin'
 }
 
-const {Column} = Table;
+const { Column } = Table;
 
-export function UsersTable() {
-    const {value} = useAppSelector(state => state.users);
-    const dispatch = useAppDispatch();
+export function UsersTable(): JSX.Element {
+    const { value } = useStoreSelector(state => state.users);
+    const dispatch = useStoreDispatch();
 
     useEffect(() => {
         dispatch(fetchUsers());
     }, []);
 
-    return <Table dataSource={value}>
-        <Column title="Id" dataIndex={UsersTableColumn.Id} key={UsersTableColumn.Id}/>
-        <Column title="Login" dataIndex={UsersTableColumn.Login} key={UsersTableColumn.Login}/>
-        <Column title="Type" dataIndex={UsersTableColumn.Type} key={UsersTableColumn.Type}
-                render={type => <Tag color='green'>{type}</Tag>}/>
-        <Column title="Is admin" dataIndex={UsersTableColumn.SiteAdmin} key={UsersTableColumn.SiteAdmin}
-                render={isAdmin => <Tag color={isAdmin ? 'blue' : 'red'}>{isAdmin ? 'Yes' : 'No'}</Tag>}/>
-    </Table>;
+    return <List itemLayout="horizontal" dataSource={value} renderItem={item => <Link to={item.login}>
+        <List.Item>
+            <List.Item.Meta title={item.login} description={item.type} />
+        </List.Item>
+    </Link>} />
 }

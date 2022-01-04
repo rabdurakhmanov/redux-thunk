@@ -1,12 +1,16 @@
-import React from 'react';
+import { Layout } from 'antd';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import {Layout} from 'antd';
-import {UsersTable} from './components/UsersTable/UsersTable';
+import { UsersTable } from './components/UsersTable/UsersTable';
+import { UserPage } from './components/UserPage/UserPage';
 
 function App() {
     return (
         <Layout className='app-layout'>
-            <UsersTable/>
+            <Routes>
+                <Route path='/' element={<UsersTable />} />
+                <Route path=':user' element={<UserPage />} />
+            </Routes>
         </Layout>
     );
 }
