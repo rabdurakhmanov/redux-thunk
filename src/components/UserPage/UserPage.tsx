@@ -1,17 +1,40 @@
-import React, { useEffect } from 'react';
+import { Card, Col, Layout, Row } from 'antd';
+import Meta from 'antd/lib/card/Meta';
+import { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { useStoreDispatch } from '../../store/hooks/storeHooks';
+import { useStoreDispatch, useStoreSelector } from '../../store/hooks/storeHooks';
+import { clearUser } from '../../store/reducers/userReducer';
 import { fetchUser } from '../../store/thunks/userThunk';
 
-export function UserPage(): null {
-    const { user } = useParams();
+export function UserPage() {
+    const { userName } = useParams();
+    const { value: user } = useStoreSelector(store => store.user);
     const dispatch = useStoreDispatch();
+    let loading = false;
 
     useEffect(() => {
-        if (user) {
-            dispatch(fetchUser(user));
+        if (userName) {
+            dispatch(fetchUser(userName)).then(() => {
+                loading = true;
+            });
+        }
+
+        return () => {
+            dispatch(clearUser());
         }
     }, []);
 
-    return null;
+    if (loading || !user) {
+        return null;
+    }
+
+    return <Layout className='layout'>
+        <Row className='layout-row'>
+            <Col span={12}>
+                <Card hoverable cover={<img alt={user.name} src={user.avatarUrl} style={{ maxWidth: '35%' }} />}>
+                    <Meta title={user.name} description={user.htmlUrl} />
+                </Card>
+            </Col>
+        </Row>
+    </Layout>;
 }

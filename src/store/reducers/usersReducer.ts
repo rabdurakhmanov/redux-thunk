@@ -1,15 +1,9 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
+import { UsersListItem } from '../../models/User/user.model';
 
-export interface User {
-    login: string,
-    id: string,
-    url: string,
-    type: string,
-    'is_admin': boolean
-}
 
 export interface UsersState {
-    value: User[];
+    value: UsersListItem[];
 }
 
 const initialState: UsersState = {

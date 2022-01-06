@@ -1,5 +1,5 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
-import { User } from './usersReducer';
+import { User } from '../../models/User/user.model';
 
 export interface UserState {
     value: User | null;
@@ -16,7 +16,7 @@ const { actions, reducer } = createSlice({
     initialState,
     reducers: {
         addUser: (state: Draft<UserState>, action: PayloadAction<any>) => {
-            state.value = {...action.payload};
+            state.value = { ...action.payload };
         },
         clearUser: (state: Draft<UserState>) => {
             state.value = null;

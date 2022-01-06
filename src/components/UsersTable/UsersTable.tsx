@@ -1,8 +1,10 @@
-import { List, Table } from 'antd';
+import { Layout, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useStoreDispatch, useStoreSelector } from '../../store/hooks/storeHooks';
+import { clearUsers } from '../../store/reducers/usersReducer';
 import { fetchUsers } from '../../store/thunks/usersThunk';
+import { UsersListItem } from '../../models/User/user.model';
 
 enum UsersTableColumn {
     Login = 'login',
@@ -11,19 +13,38 @@ enum UsersTableColumn {
     SiteAdmin = 'site_admin'
 }
 
-const { Column } = Table;
+enum UsersTableColumnTitle {
+    Login = 'Login',
+    Id = 'Id',
+    Type = 'Type',
+    SiteAdmin = 'Is admin?'
+}
 
-export function UsersTable(): JSX.Element {
-    const { value } = useStoreSelector(state => state.users);
+export function UsersTable() {
+    const { value: users } = useStoreSelector(state => state.users);
     const dispatch = useStoreDispatch();
+    const { Column } = Table;
 
     useEffect(() => {
         dispatch(fetchUsers());
+
+        return () => {
+            dispatch(clearUsers());
+        }
     }, []);
 
-    return <List itemLayout="horizontal" dataSource={value} renderItem={item => <Link to={item.login}>
-        <List.Item>
-            <List.Item.Meta title={item.login} description={item.type} />
-        </List.Item>
-    </Link>} />
+    return <Layout className='layout'>
+        <Table dataSource={users}>
+            <Column title={UsersTableColumnTitle.Login} dataIndex={UsersTableColumn.Login} key={UsersTableColumn.Login} />
+            <Column title={UsersTableColumnTitle.Type} dataIndex={UsersTableColumn.Type} key={UsersTableColumn.Type}
+                render={type => <Tag color='green'>{type}</Tag>} />
+            <Column title={UsersTableColumnTitle.SiteAdmin} dataIndex={UsersTableColumn.SiteAdmin} key={UsersTableColumn.SiteAdmin}
+                render={isAdmin => <Tag color={isAdmin ? 'blue' : 'red'}>{isAdmin ? 'Yes' : 'No'}</Tag>} />
+            <Column
+                title="Action"
+                key="action"
+                render={(_, record: UsersListItem) => (<Link to={record.login}>more</Link>)}
+            />
+        </Table>
+    </Layout>;
 }
