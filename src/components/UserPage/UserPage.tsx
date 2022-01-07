@@ -2,7 +2,7 @@ import { Card, Col, Layout, Row } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
-import { clearUser } from '../../store/reducers/userReducer';
+import { clearUser } from '../../store/reducers/user.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUser } from '../../store/thunks/user.thunk';
 

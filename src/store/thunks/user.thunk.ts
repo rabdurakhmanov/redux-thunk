@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { User, UserFromServer, UsersListItem, UsersListItemFromServer } from '../models/user.model';
-import { addUser } from '../reducers/userReducer';
-import { addUsers } from '../reducers/usersReducer';
+import { addUser } from '../reducers/user.reducer';
+import { addUsers } from '../reducers/users.reducer';
 import { StoreDispatch } from '../store';
 
 const usersURL = 'https://api.github.com/users';

@@ -2,7 +2,7 @@ import { Layout, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UsersListItem } from '../../store/models/user.model';
-import { clearUsers } from '../../store/reducers/usersReducer';
+import { clearUsers } from '../../store/reducers/users.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUsers } from '../../store/thunks/user.thunk';
 
