@@ -24,14 +24,21 @@ export function UsersTable() {
     const { value: users } = useStoreSelector(state => state.users);
     const dispatch = useStoreDispatch();
     const { Column } = Table;
+    let loading = false;
 
     useEffect(() => {
-        dispatch(fetchUsers());
+        dispatch(fetchUsers()).then(() => {
+            loading = true;
+        });
 
         return () => {
             dispatch(clearUsers());
         }
     }, []);
+
+    if (loading || !users.length) {
+        return null;
+    }
 
     return <Layout className='layout'>
         <Table dataSource={users}>

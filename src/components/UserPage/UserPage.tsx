@@ -5,6 +5,7 @@ import { useParams } from 'react-router';
 import { clearUser } from '../../store/reducers/user.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUser } from '../../store/thunks/user.thunk';
+import './UserPage.css';
 
 export function UserPage() {
     const { userName } = useParams();
@@ -31,7 +32,7 @@ export function UserPage() {
     return <Layout className='layout'>
         <Row className='layout-row'>
             <Col span={12}>
-                <Card hoverable cover={<img alt={user.name} src={user.avatarUrl} style={{ maxWidth: '35%' }} />}>
+                <Card hoverable cover={<img alt={user.name} src={user.avatarUrl} style={{ maxWidth: '35%' }} />} className='userpage-card'>
                     <Meta title={user.name} description={user.htmlUrl} />
                 </Card>
             </Col>
