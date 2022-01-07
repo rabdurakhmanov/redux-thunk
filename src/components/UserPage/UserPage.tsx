@@ -1,7 +1,7 @@
-import { Card, Col, Layout, Row } from 'antd';
+import { Button, Card, Col, Empty, Layout, Row, Spin } from 'antd';
 import Meta from 'antd/lib/card/Meta';
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { clearUser } from '../../store/reducers/user.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUser } from '../../store/thunks/user.thunk';
@@ -10,6 +10,7 @@ import './UserPage.css';
 export function UserPage() {
     const { userName } = useParams();
     const { value: user } = useStoreSelector(store => store.user);
+    const navigate = useNavigate();
     const dispatch = useStoreDispatch();
     let loading = false;
 
@@ -25,8 +26,20 @@ export function UserPage() {
         }
     }, []);
 
-    if (loading || !user) {
-        return null;
+    if (loading) {
+        return <Layout className='layout userpage-layout'>
+            <Spin size='large' tip='Loading...' />
+        </Layout>;
+    }
+
+    if (!user) {
+        return <Layout className='layout userpage-layout'>
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='User not found'>
+                <Button type='primary' onClick={() => navigate('/')}>
+                    Go to users page
+                </Button>
+            </Empty>
+        </Layout>;
     }
 
     return <Layout className='layout'>

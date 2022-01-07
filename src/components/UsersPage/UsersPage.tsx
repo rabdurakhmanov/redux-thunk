@@ -1,16 +1,17 @@
-import { Layout, Table, Tag } from 'antd';
+import { Layout, Spin, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UsersListItem } from '../../store/models/user.model';
 import { clearUsers } from '../../store/reducers/users.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUsers } from '../../store/thunks/user.thunk';
+import './UsersPage.css';
 
 enum UsersTableColumn {
     Login = 'login',
     Id = 'id',
     Type = 'type',
-    SiteAdmin = 'site_admin'
+    SiteAdmin = 'siteAdmin'
 }
 
 enum UsersTableColumnTitle {
@@ -36,12 +37,14 @@ export function UsersTable() {
         }
     }, []);
 
-    if (loading || !users.length) {
-        return null;
+    if (loading) {
+        return <Layout className='layout userspage-layout'>
+            <Spin size='large' tip='Loding...' />
+        </Layout>
     }
 
     return <Layout className='layout'>
-        <Table dataSource={users}>
+        <Table dataSource={users} className='userspage-table'>
             <Column title={UsersTableColumnTitle.Login} dataIndex={UsersTableColumn.Login} key={UsersTableColumn.Login} />
             <Column title={UsersTableColumnTitle.Type} dataIndex={UsersTableColumn.Type} key={UsersTableColumn.Type}
                 render={type => <Tag color='green'>{type}</Tag>} />

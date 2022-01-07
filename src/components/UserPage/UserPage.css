@@ -1,3 +1,9 @@
+.userpage-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .ant-card-cover {
     padding-top: 8px;
     display: flex;

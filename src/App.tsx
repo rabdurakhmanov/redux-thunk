@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { UsersTable } from './components/UsersTable/UsersTable';
 import { UserPage } from './components/UserPage/UserPage';
+import { UsersTable } from './components/UsersPage/UsersPage';
 
 function App() {
     return (
