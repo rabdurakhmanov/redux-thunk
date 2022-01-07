@@ -1,10 +1,12 @@
-import { Button, Card, Col, Empty, Layout, Row, Spin } from 'antd';
-import Meta from 'antd/lib/card/Meta';
+import { Button, Card, Col, Empty, Image, Row } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { clearUser } from '../../store/reducers/user.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUser } from '../../store/thunks/user.thunk';
+import { AppLayout } from '../AppLayout/AppLayout';
+import '../AppLayout/AppLayout.css';
+import { AppSpin } from '../AppSpin/AppSpin';
 import './UserPage.css';
 
 export function UserPage() {
@@ -12,6 +14,7 @@ export function UserPage() {
     const { value: user } = useStoreSelector(store => store.user);
     const navigate = useNavigate();
     const dispatch = useStoreDispatch();
+    const { Meta } = Card;
     let loading = false;
 
     useEffect(() => {
@@ -27,28 +30,26 @@ export function UserPage() {
     }, []);
 
     if (!userName) {
-        return <Layout className='layout userpage-layout'>
+        return <AppLayout cssName='layout-centered' >
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='User not found'>
                 <Button type='primary' onClick={() => navigate('/')}>
                     Go to users page
                 </Button>
             </Empty>
-        </Layout>;
+        </AppLayout>;
     }
 
     if (loading || !user) {
-        return <Layout className='layout userpage-layout'>
-            <Spin size='large' tip='Loading...' />
-        </Layout>;
+        return <AppSpin />;
     }
 
-    return <Layout className='layout'>
-        <Row className='layout-row'>
+    return <AppLayout>
+        <Row className='userpage-row'>
             <Col span={12}>
-                <Card hoverable cover={<img alt={user.name} src={user.avatarUrl} style={{ maxWidth: '35%' }} />} className='userpage-card'>
+                <Card hoverable cover={<Image alt={user.name} src={user.avatarUrl} width='35%' />} className='userpage-card'>
                     <Meta title={user.name} description={user.htmlUrl} />
                 </Card>
             </Col>
         </Row>
-    </Layout>;
+    </AppLayout>;
 }

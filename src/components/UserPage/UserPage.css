@@ -12,7 +12,8 @@
     justify-content: center;
 }
 
-.userpage-layout {
+.userpage-row {
+    height: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
