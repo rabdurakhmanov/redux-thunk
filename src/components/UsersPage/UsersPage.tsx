@@ -28,12 +28,10 @@ export function UsersTable() {
     let loading = false;
 
     useEffect(() => {
-        dispatch(fetchUsers()).then(() => {
-            loading = true;
-        });
-
-        return () => {
-            dispatch(clearUsers());
+        if (!users.length) {
+            dispatch(fetchUsers()).then(() => {
+                loading = true;
+            });
         }
     }, []);
 

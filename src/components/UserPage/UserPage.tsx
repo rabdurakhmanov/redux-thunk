@@ -26,19 +26,19 @@ export function UserPage() {
         }
     }, []);
 
-    if (loading) {
-        return <Layout className='layout userpage-layout'>
-            <Spin size='large' tip='Loading...' />
-        </Layout>;
-    }
-
-    if (!user) {
+    if (!userName) {
         return <Layout className='layout userpage-layout'>
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='User not found'>
                 <Button type='primary' onClick={() => navigate('/')}>
                     Go to users page
                 </Button>
             </Empty>
+        </Layout>;
+    }
+
+    if (loading || !user) {
+        return <Layout className='layout userpage-layout'>
+            <Spin size='large' tip='Loading...' />
         </Layout>;
     }
 
