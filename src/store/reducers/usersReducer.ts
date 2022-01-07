@@ -1,6 +1,5 @@
 import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
-import { UsersListItem } from '../../models/User/user.model';
-
+import { UsersListItem } from '../models/user.model';
 
 export interface UsersState {
     value: UsersListItem[];

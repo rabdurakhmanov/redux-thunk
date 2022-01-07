@@ -1,10 +1,10 @@
 import { Layout, Table, Tag } from 'antd';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useStoreDispatch, useStoreSelector } from '../../store/hooks/storeHooks';
+import { UsersListItem } from '../../store/models/user.model';
 import { clearUsers } from '../../store/reducers/usersReducer';
-import { fetchUsers } from '../../store/thunks/usersThunk';
-import { UsersListItem } from '../../models/User/user.model';
+import { useStoreDispatch, useStoreSelector } from '../../store/store';
+import { fetchUsers } from '../../store/thunks/user.thunk';
 
 enum UsersTableColumn {
     Login = 'login',
