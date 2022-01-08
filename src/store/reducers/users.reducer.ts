@@ -1,9 +1,6 @@
-import { createSlice, Draft, PayloadAction } from '@reduxjs/toolkit';
-import { UsersListItem } from '../models/user.model';
-
-export interface UsersState {
-    value: UsersListItem[];
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { UsersState } from '../models/users.model';
+import { usersActions } from '../actions/users.actions';
 
 const initialState: UsersState = {
     value: [],
@@ -15,12 +12,8 @@ const { actions, reducer } = createSlice({
     name,
     initialState,
     reducers: {
-        addUsers: (state: Draft<UsersState>, action: PayloadAction<any>) => {
-            state.value = [...state.value, ...action.payload];
-        },
-        clearUsers: (state: Draft<UsersState>) => {
-            state.value = [];
-        },
+        addUsers: usersActions.addUsers,
+        clearUsers: usersActions.clearUsers,
     },
 });
 

@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import { UserPage } from './components/UserPage/UserPage';
-import { UsersPage } from './components/UsersPage/UsersPage';
+import { UserPage } from './pages/UserPage/UserPage';
+import { UsersPage } from './pages/UsersPage/UsersPage';
 
-function App() {
+export const App = function () {
     return (
         <Routes>
             <Route path='/' element={<UsersPage />} />
@@ -11,5 +11,3 @@ function App() {
         </Routes>
     );
 }
-
-export default App;

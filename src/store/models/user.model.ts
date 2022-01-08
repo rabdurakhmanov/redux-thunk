@@ -29,3 +29,7 @@ export interface User extends UsersListItem {
     blog: string;
     location: string;
 }
+
+export interface UserState {
+    value: User | null;
+}

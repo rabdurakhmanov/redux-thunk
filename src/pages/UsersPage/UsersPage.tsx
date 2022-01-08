@@ -1,12 +1,12 @@
 import { Table, Tag } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UsersListItem } from '../../store/models/user.model';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
-import { fetchUsers } from '../../store/thunks/user.thunk';
-import { AppLayout } from '../AppLayout/AppLayout';
-import '../AppLayout/AppLayout.css';
-import { AppSpin } from '../AppSpin/AppSpin';
+import { fetchUsers } from '../../store/thunks/users.thunk';
+import { AppLayout } from '../../layouts/AppLayout/AppLayout';
+import '../../layouts/AppLayout/AppLayout.css';
+import { AppSpin } from '../../components/AppSpin/AppSpin';
 
 enum UsersTableColumn {
     Login = 'login',
@@ -22,16 +22,16 @@ enum UsersTableColumnTitle {
     SiteAdmin = 'Is admin?'
 }
 
-export function UsersPage() {
+export const UsersPage = function () {
     const { value: users } = useStoreSelector(state => state.users);
     const dispatch = useStoreDispatch();
     const { Column } = Table;
-    let loading = false;
+    const [loading, setLoading] = useState(!users.length);
 
     useEffect(() => {
         if (!users.length) {
             dispatch(fetchUsers()).then(() => {
-                loading = true;
+                setLoading(false);
             });
         }
     }, []);

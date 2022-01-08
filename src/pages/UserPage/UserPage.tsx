@@ -1,26 +1,26 @@
 import { Button, Card, Col, Empty, Image, Row } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { clearUser } from '../../store/reducers/user.reducer';
 import { useStoreDispatch, useStoreSelector } from '../../store/store';
 import { fetchUser } from '../../store/thunks/user.thunk';
-import { AppLayout } from '../AppLayout/AppLayout';
-import '../AppLayout/AppLayout.css';
-import { AppSpin } from '../AppSpin/AppSpin';
+import { AppLayout } from '../../layouts/AppLayout/AppLayout';
+import '../../layouts/AppLayout/AppLayout.css';
+import { AppSpin } from '../../components/AppSpin/AppSpin';
 import './UserPage.css';
 
-export function UserPage() {
+export const UserPage = function () {
     const { userName } = useParams();
     const { value: user } = useStoreSelector(store => store.user);
     const navigate = useNavigate();
     const dispatch = useStoreDispatch();
     const { Meta } = Card;
-    let loading = false;
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (userName) {
             dispatch(fetchUser(userName)).then(() => {
-                loading = true;
+                setLoading(false);
             });
         }
 
@@ -51,5 +51,5 @@ export function UserPage() {
                 </Card>
             </Col>
         </Row>
-    </AppLayout>;
+    </AppLayout >;
 }

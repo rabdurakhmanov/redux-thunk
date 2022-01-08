@@ -6,6 +6,6 @@ interface AppLayoutProps {
     children?: JSX.Element;
 }
 
-export function AppLayout({ cssName, children }: AppLayoutProps) {
+export const AppLayout = function ({ cssName, children }: AppLayoutProps) {
     return <Layout className={cssName ? `layout ${cssName}` : 'layout'} children={children} />;
 }
