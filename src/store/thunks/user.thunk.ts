@@ -1,7 +1,7 @@
 import axios from "axios";
+import { onAddUser } from "../actions/user.actions";
+import { StoreDispatch } from "../models/store.model";
 import { User, UserFromServer } from "../models/user.model";
-import { addUser } from "../reducers/user.reducer";
-import { StoreDispatch } from "../store";
 
 const usersURL = 'https://api.github.com/users';
 
@@ -23,6 +23,6 @@ export const fetchUser = function (userLogin: string) {
             location: userFromServer.location
         };
 
-        dispatch(addUser(user));
+        dispatch(onAddUser(user));
     }
 }

@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { User, UserFromServer, UsersListItem, UsersListItemFromServer } from '../models/user.model';
-import { addUser } from '../reducers/user.reducer';
-import { addUsers } from '../reducers/users.reducer';
-import { StoreDispatch } from '../store';
+import { onAddUsers } from '../actions/users.actions';
+import { StoreDispatch } from '../models/store.model';
+import { UsersListItem, UsersListItemFromServer } from '../models/user.model';
 
 const usersURL = 'https://api.github.com/users';
 
@@ -18,6 +17,6 @@ export const fetchUsers = function () {
             siteAdmin: user.site_admin
         }));
 
-        dispatch(addUsers(users));
+        dispatch(onAddUsers(users));
     }
 }

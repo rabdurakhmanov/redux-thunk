@@ -1,17 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import userReducer from './reducers/user.reducer';
-import usersReducer from './reducers/users.reducer';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { StoreDispatch, StoreState, ThunkDispatch } from './models/store.model';
+import { userReducer } from './reducers/user.reducer';
+import { usersReducer } from './reducers/users.reducer';
 
-export const store = configureStore({
-    reducer: {
-        user: userReducer,
-        users: usersReducer
-    },
-});
+export const store = createStore(combineReducers({ user: userReducer, users: usersReducer }), applyMiddleware(thunk));
 
-export type StoreState = ReturnType<typeof store.getState>;
-export type StoreDispatch = typeof store.dispatch;
-
-export const useStoreDispatch = () => useDispatch<StoreDispatch>();
 export const useStoreSelector = useSelector as TypedUseSelectorHook<StoreState>;
+export const useStoreDispatch = function () {
+    return useDispatch<StoreDispatch>();
+};
+export const useThunkDispatch = function () {
+    return useDispatch<ThunkDispatch>();
+};

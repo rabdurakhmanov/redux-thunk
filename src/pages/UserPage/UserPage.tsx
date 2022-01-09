@@ -1,31 +1,32 @@
 import { Button, Card, Col, Empty, Image, Row } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
-import { clearUser } from '../../store/reducers/user.reducer';
-import { useStoreDispatch, useStoreSelector } from '../../store/store';
-import { fetchUser } from '../../store/thunks/user.thunk';
+import { AppSpin } from '../../components/AppSpin/AppSpin';
 import { AppLayout } from '../../layouts/AppLayout/AppLayout';
 import '../../layouts/AppLayout/AppLayout.css';
-import { AppSpin } from '../../components/AppSpin/AppSpin';
+import { onClearUser } from '../../store/actions/user.actions';
+import { useStoreDispatch, useStoreSelector, useThunkDispatch } from '../../store/store';
+import { fetchUser } from '../../store/thunks/user.thunk';
 import './UserPage.css';
 
 export const UserPage = function () {
     const { userName } = useParams();
     const { value: user } = useStoreSelector(store => store.user);
     const navigate = useNavigate();
-    const dispatch = useStoreDispatch();
+    const thunkDispatch = useThunkDispatch();
+    const storeDispatch = useStoreDispatch();
     const { Meta } = Card;
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (userName) {
-            dispatch(fetchUser(userName)).then(() => {
+            thunkDispatch(fetchUser(userName)).then(() => {
                 setLoading(false);
             });
         }
 
         return () => {
-            dispatch(clearUser());
+            storeDispatch(onClearUser());
         }
     }, []);
 

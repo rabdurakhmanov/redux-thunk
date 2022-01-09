@@ -1,15 +1,19 @@
-import { Draft, PayloadAction } from "@reduxjs/toolkit";
-import { UsersState } from "../models/users.model";
+import { Action } from "../models/store.model";
+import { UsersListItem } from "../models/user.model";
+import { UsersActionTypes } from "../models/users.model";
 
-const addUsers = (state: Draft<UsersState>, action: PayloadAction<any>) => {
-    state.value = [...state.value, ...action.payload];
+const { AddUsers, ClearUsers } = UsersActionTypes;
+
+export const onAddUsers = function (users: UsersListItem[]): Action<UsersActionTypes, UsersListItem[]> {
+    return {
+        type: AddUsers,
+        payload: users
+    };
 }
 
-const clearUsers = (state: Draft<UsersState>) => {
-    state.value = [];
+export const onClearUsers = function (): Action<UsersActionTypes, []> {
+    return {
+        type: ClearUsers,
+        payload: []
+    };
 }
-
-export const usersActions = {
-    addUsers,
-    clearUsers
-};

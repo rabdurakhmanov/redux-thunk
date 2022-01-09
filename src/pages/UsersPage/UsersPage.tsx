@@ -1,12 +1,12 @@
 import { Table, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UsersListItem } from '../../store/models/user.model';
-import { useStoreDispatch, useStoreSelector } from '../../store/store';
-import { fetchUsers } from '../../store/thunks/users.thunk';
+import { AppSpin } from '../../components/AppSpin/AppSpin';
 import { AppLayout } from '../../layouts/AppLayout/AppLayout';
 import '../../layouts/AppLayout/AppLayout.css';
-import { AppSpin } from '../../components/AppSpin/AppSpin';
+import { UsersListItem } from '../../store/models/user.model';
+import { useStoreSelector, useThunkDispatch } from '../../store/store';
+import { fetchUsers } from '../../store/thunks/users.thunk';
 
 enum UsersTableColumn {
     Login = 'login',
@@ -24,7 +24,7 @@ enum UsersTableColumnTitle {
 
 export const UsersPage = function () {
     const { value: users } = useStoreSelector(state => state.users);
-    const dispatch = useStoreDispatch();
+    const dispatch = useThunkDispatch();
     const { Column } = Table;
     const [loading, setLoading] = useState(!users.length);
 

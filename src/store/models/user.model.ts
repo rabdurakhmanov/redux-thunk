@@ -1,3 +1,4 @@
+
 export interface UsersListItemFromServer {
     login: string;
     id: string;
@@ -28,6 +29,11 @@ export interface User extends UsersListItem {
     company: string;
     blog: string;
     location: string;
+}
+
+export enum UserActionTypes {
+    AddUser = 'ADD_USER',
+    ClearUser = 'CLEAR_USER'
 }
 
 export interface UserState {
