@@ -24,7 +24,6 @@
     "eslint-plugin-sonarjs": "^0.11.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.3",
-    "pre-commit": "^1.2.2",
     "prettier": "^2.5.1",
     "react-scripts": "5.0.0",
     "typescript": "^4.5.5"
@@ -32,6 +31,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "prepare": "husky install"
-  }
+    "prepare": "husky install",
+    "postinstall": "husky install"
+  },
+  "packageManager": "yarn@3.1.1"
 }
