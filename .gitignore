@@ -1,24 +1,24 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+.DS_Store
+
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+
+.eslintcache
+
+/.idea
+/.vscode
+
 /.yarn/cache
 /.yarn/install-state.gz
 
-# testing
-/coverage
-
-# production
 /build
 
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+/coverage
 
-# logs
+/node_modules
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
