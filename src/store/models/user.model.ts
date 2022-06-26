@@ -1,4 +1,3 @@
-
 export interface UsersListItemFromServer {
     login: string;
     id: string;
@@ -32,8 +31,8 @@ export interface User extends UsersListItem {
 }
 
 export enum UserActionTypes {
-    AddUser = 'ADD_USER',
-    ClearUser = 'CLEAR_USER'
+    AddUser = "ADD_USER",
+    ClearUser = "CLEAR_USER"
 }
 
 export interface UserState {

@@ -3,11 +3,13 @@ import { onAddUser } from "../actions/user.actions";
 import { StoreDispatch } from "../models/store.model";
 import { User, UserFromServer } from "../models/user.model";
 
-const usersURL = 'https://api.github.com/users';
+const usersURL = "https://api.github.com/users";
 
 export const fetchUser = function (userLogin: string) {
     return async (dispatch: StoreDispatch) => {
-        const response = await axios.get<UserFromServer>(`${usersURL}/${userLogin}`);
+        const response = await axios.get<UserFromServer>(
+            `${usersURL}/${userLogin}`
+        );
         const userFromServer = response.data;
 
         const user: User = {
@@ -24,5 +26,5 @@ export const fetchUser = function (userLogin: string) {
         };
 
         dispatch(onAddUser(user));
-    }
-}
+    };
+};

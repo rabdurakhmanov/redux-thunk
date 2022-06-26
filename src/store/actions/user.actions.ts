@@ -8,11 +8,11 @@ export const onAddUser = function (user: User): Action<UserActionTypes, User> {
         type: AddUser,
         payload: user
     };
-}
+};
 
 export const onClearUser = function (): Action<UserActionTypes, null> {
     return {
         type: ClearUser,
         payload: null
     };
-}
+};

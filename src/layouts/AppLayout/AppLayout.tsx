@@ -1,5 +1,5 @@
-import { Layout } from 'antd';
-import './AppLayout.css';
+import { Layout } from "antd";
+import "./AppLayout.scss";
 
 interface AppLayoutProps {
     cssName?: string;
@@ -7,5 +7,10 @@ interface AppLayoutProps {
 }
 
 export const AppLayout = function ({ cssName, children }: AppLayoutProps) {
-    return <Layout className={cssName ? `layout ${cssName}` : 'layout'} children={children} />;
-}
+    return (
+        <Layout
+            className={cssName ? `layout ${cssName}` : "layout"}
+            children={children}
+        />
+    );
+};
